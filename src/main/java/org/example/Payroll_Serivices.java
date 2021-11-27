@@ -13,30 +13,25 @@ public class Payroll_Serivices {
                 System.out.println("Connected successfully!!");
             }
             Statement readStatement = connection.createStatement();
-            String sqlCreate = "create table Employee_payroll_Services (id int(50) auto_increment, Name varchar(50),Salary varchar(50),Start_Date varchar(10), Gender varchar(10), Base_pay float(50), primary key(id))";
-            int createValue=readStatement.executeUpdate(sqlCreate);
-            if(createValue > 0){
-                System.out.println("Employee payroll services database Created Sucessfully!!");
-            }
             String sqlInsert = "INSERT INTO Employee_payroll_Services (Name, Salary, Start_Date, Gender) values (?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sqlInsert);
             statement.setString(1, "Jungkook");
-            statement.setString(2, "Jeon");
+            statement.setString(2, "30k");
             statement.setString(3, "12-12-1995");
             statement.setString(4, "M");
             statement.execute();
             statement.setString(1, "Jimin");
-            statement.setString(2, "kim");
+            statement.setString(2, "20k");
             statement.setString(3, "02-02-1993");
             statement.setString(4, "F");
             statement.execute();
             statement.setString(1, "Terisa");
-            statement.setString(2, "sung");
+            statement.setString(2, "25k");
             statement.setString(3, "02-11-1994");
             statement.setString(4, "F");
             statement.execute();
             statement.setString(1, "Terisa");
-            statement.setString(2, "kim");
+            statement.setString(2, "10k");
             statement.setString(3, "30-02-1995");
             statement.setString(4, "F");
             boolean rowsInserted = statement.execute();
@@ -48,6 +43,32 @@ public class Payroll_Serivices {
             if(insertValue > 0){
                 System.out.println(" Employee Details Insert Sucessfully!!");
             }
+            String sqlUpdate = "update Employee_payroll_Services set Base_pay ='80000.00' where Name = 'Tae Hyung'";
+            int updatevalue = readStatement.executeUpdate(sqlUpdate);
+            if(updatevalue > 0){
+                System.out.println("Employee details Updated Sucessfully!!");
+            }
+            String sqlUpdate1 = "update Employee_payroll_Services set Base_pay ='60000.00' where Name = 'Jungkook'";
+            int updatevalue1 = readStatement.executeUpdate(sqlUpdate1);
+            if(updatevalue1 > 0){
+                System.out.println("Employee details Updated Sucessfully!!");
+            }
+            String sqlUpdate2 = "update Employee_payroll_Services set Base_pay ='50000.00' where Name = 'Jimin'";
+            int updatevalue2 = readStatement.executeUpdate(sqlUpdate2);
+            if(updatevalue2 > 0){
+                System.out.println("Employee details Updated Sucessfully!!");
+            }
+            String sqlUpdate3 = "update Employee_payroll_Services set Base_pay ='30000.00' where Name = 'Terisa'";
+            int updatevalue3 = readStatement.executeUpdate(sqlUpdate3);
+            if(updatevalue3 > 0){
+                System.out.println("Employee details Updated Sucessfully!!");
+            }
+            String sqlUpdate4 = "update Employee_payroll_Services set Base_pay ='20000.00' where Salary = '25k'";
+            int updatevalue4 = readStatement.executeUpdate(sqlUpdate4);
+            if(updatevalue4 > 0){
+                System.out.println("Employee details Updated Sucessfully!!");
+            }
+
             String sqlRead = "SELECT * FROM Employee_payroll_Services";
             ResultSet resultSet = readStatement.executeQuery(sqlRead);
             while(resultSet.next()) {
