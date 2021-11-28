@@ -43,30 +43,23 @@ public class Payroll_Serivices {
             if(insertValue > 0){
                 System.out.println(" Employee Details Insert Sucessfully!!");
             }
-            String sqlUpdate = "update Employee_payroll_Services set Base_pay ='80000.00' where Name = 'Tae Hyung'";
-            int updatevalue = readStatement.executeUpdate(sqlUpdate);
-            if(updatevalue > 0){
-                System.out.println("Employee details Updated Sucessfully!!");
-            }
-            String sqlUpdate1 = "update Employee_payroll_Services set Base_pay ='60000.00' where Name = 'Jungkook'";
-            int updatevalue1 = readStatement.executeUpdate(sqlUpdate1);
-            if(updatevalue1 > 0){
-                System.out.println("Employee details Updated Sucessfully!!");
-            }
-            String sqlUpdate2 = "update Employee_payroll_Services set Base_pay ='50000.00' where Name = 'Jimin'";
-            int updatevalue2 = readStatement.executeUpdate(sqlUpdate2);
-            if(updatevalue2 > 0){
-                System.out.println("Employee details Updated Sucessfully!!");
-            }
-            String sqlUpdate3 = "update Employee_payroll_Services set Base_pay ='30000.00' where Name = 'Terisa'";
-            int updatevalue3 = readStatement.executeUpdate(sqlUpdate3);
-            if(updatevalue3 > 0){
-                System.out.println("Employee details Updated Sucessfully!!");
-            }
-            String sqlUpdate4 = "update Employee_payroll_Services set Base_pay ='20000.00' where Salary = '25k'";
-            int updatevalue4 = readStatement.executeUpdate(sqlUpdate4);
-            if(updatevalue4 > 0){
-                System.out.println("Employee details Updated Sucessfully!!");
+            String sqlUpdate = "update Employee_payroll_Services set Base_pay=? where Name=?";
+            PreparedStatement preparedStatementUpdate = connection.prepareStatement(sqlUpdate);
+            preparedStatementUpdate.setInt(1, 30000);
+            preparedStatementUpdate.setString(2, "Terisa");
+            preparedStatementUpdate.executeUpdate();
+            preparedStatementUpdate.setInt(1, 80000);
+            preparedStatementUpdate.setString(2, "Tae Hyung");
+            preparedStatementUpdate.executeUpdate();
+            preparedStatementUpdate.setInt(1, 50000);
+            preparedStatementUpdate.setString(2, "Jungkook");
+            preparedStatementUpdate.executeUpdate();
+            preparedStatementUpdate.setInt(1, 45000);
+            preparedStatementUpdate.setString(2, "Jimin");
+            preparedStatementUpdate.executeUpdate();
+            int rowsEffected = preparedStatementUpdate.executeUpdate();
+            if (rowsEffected > 0) {
+                System.out.println("Base Pay is updated Successfully!!");
             }
 
             String sqlRead = "SELECT * FROM Employee_payroll_Services";
@@ -77,7 +70,7 @@ public class Payroll_Serivices {
                 String Salary = resultSet.getString("Salary");
                 String Start_Date = resultSet.getString("Start_Date");
                 String Gender = resultSet.getString("Gender");
-                String Base_pay = resultSet.getString("Base_pay");
+                int Base_pay = resultSet.getInt("Base_pay");
                 System.out.println(id + " | " + Name + " | "+ Salary + " | "+ Start_Date + " | "+Gender + " | "+Base_pay);
             }
             connection.close();
